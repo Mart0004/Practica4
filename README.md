@@ -1,8 +1,7 @@
 # Práctica 4: SISTEMAS OPERATIVOS EN TIEMPO REAL
-## Introducción de la práctica
-En esta práctica va enfocada en los sistemas operativos en tiempo real, especialmente la ejecución de tareas, dónde se dividirán entre ellas el tiempo de uso para realizarlas.
-
-## Primera parte del ejercicio práctico
+## Introducción
+Esta práctica se centra en los sistemas operativos en tiempo real y su capacidad para gestionar múltiples tareas de manera eficiente. Se asigna un período de tiempo específico para que cada tarea pueda ejecutarse, lo que permite dividir el tiempo de procesamiento entre ellas.
+## Ejercicio práctico *parte 1*:
 ```c++
 #include<Arduino.h>
 
@@ -37,12 +36,11 @@ void anotherTask(void *parameter) {
 }
 ```
 ### Funcionamiento y salida por terminal
-El funcionamiento de el código proporcionado, se basa en que crea 2 tareas donde se utliza un un sistema de operativo de tiempo real FreeRTOS.
+Este código opera mediante la creación de dos tareas utilizando el sistema operativo en tiempo real FreeRTOS.
 
-- **La tarea principal**: se ejecuta en la función *loop()*, imprime repetidamente un mensaje ("this is ESP32 Task") en el puerto serie y espera 1 segundo entre cada impresión.
-- **La segunda tarea**: creada en la función *setup()* y llamada anotherTask, también imprime repetidamente un mensaje ("this is another Task") en el puerto serie y espera 1 segundo entre cada impresión.
-
-Las salidas que se muestran ppor el puerto serie son las siguientes:
+**Tarea principal**: Se ejecuta en la función *loop()*. Consiste en imprimir un mensaje ("this is ESP32 Task") repetidamente en el puerto serie y esperar 1 segundo entre cada impresión.
+**Segunda tarea**: Creada en la función *setup()* y denominada "anotherTask". También imprime repetidamente un mensaje ("this is another Task") en el puerto serie y espera 1 segundo entre cada impresión.
+Las salidas que se muestran por el puerto serie son las siguientes:
 ```
    - this is ESP32 Task
    - this is another Task
@@ -60,7 +58,7 @@ graph TD;
     F --> G["Delay de 1000ms"];
     G --> F;
 ```
-## Segunda parte del ejercicio práctico - Semáforo
+## Ejercicio práctico *parte 2* - *Semáforo*
 ```c++
 #include <Arduino.h>
 #include <FreeRTOS.h>
@@ -104,20 +102,20 @@ void apagarLED(void *parameter) {
 ```
 ### Funcionamiento y salida por terminal
 
-En el anterior código tenemos un programa donde con la ayuda de un semáforo, se pueden utilizar dos tareas, (una que enciende el led ) y otra tarea ( que apaga el Led), en el programa se puede ver que el tiempo del DELAY es de 1 segundo, lo cual cada 1 segundo se van alternando.
+En el código previo, se presenta un programa que emplea un "*semáforo*" para gestionar dos tareas: una tarea enciende un LED y la otra tarea lo apaga. Notamos que el intervalo de tiempo definido por el *DELAY* es de 1 segundo. Esto significa que el LED se enciende y se apaga alternativamente cada segundo.
 
-### Funciones / Subprogramas utilizados: 
+### Funciones utilizadas: 
 
-En este codigo tenemos 4 funciones para llevarlo a cabo.
+Para llevarlo a cabo tenemos:
 
- - #### *Función setup()* :
-   se inicia la comunicación serial y se configura el pin del LED como salida.
+ - #### *Setup()* :
+   Se realiza la inicialización de la comunicación serial y se establece la configuración del pin del LED como salida.
 
- - #### *Función loop()*:
-   no es necesario realizar ninguna acción en el bucle principal.
+ - #### *Loop()*:
+   No es necesario realizar ninguna acción en el bucle principal.
 
- - #### *Funciones : encenderLED() y apagarLED()*:
-   son las tareas que se ejecutarán concurrentemente. Ambas funciones son ciclos infinitos (for (;;)) que alternan entre encender y apagar el LED con un intervalo de un segundo.
+ - #### *EncenderLED() y apagarLED()*:
+   Estas son las tareas que se llevarán a cabo simultáneamente. Ambas funciones consisten en bucles infinitos (for (;;)) que se turnan para encender y apagar el LED con un intervalo de un segundo.
 
 ### Salida puerto serie:
 
@@ -127,6 +125,9 @@ Alternando las 2 tareas, se imprime "LED HIGH" cuando el LED se enciende, y en l
 LED HIGH
 LED LOW
 LED HIGH
+.
+.
+.
 ```
    
    
